@@ -36,11 +36,12 @@ int demoMain(int argc, char *argv[]) {
     admin_serverCreateChild(root_o, "admin", 9090);
 
     /* Instantiate table with name 'Car' and type 'demo/Car' */
-    corto_object topic = corto_tablescopeCreateChild(root_o, "Car", demo_Car_o);
+    corto_object cars = corto_tablescopeCreateChild(root_o, "Car", demo_Car_o);
 
     /* Create new car instances */
     for (i = 0; i < CAR_COUNT; i++) {
-        instances[i] = demo_CarDeclareChild(topic, NULL);
+        /* Create new Car with random id */
+        instances[i] = demo_CarDeclareChild(cars, NULL);
 
         corto_setref(&instances[i]->make, makeSeq.buffer[(int)rnd(makeSeq.length)]);
 
