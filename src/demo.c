@@ -28,17 +28,17 @@ int demoMain(int argc, char *argv[]) {
     /* Load car makes */
     corto_load("makes.cx", 0, NULL);
 
-    /* Load objects in array */
+    /* Load make objects in array */
     corto_object makes = corto_lookupAssert(root_o, "Make", corto_tablescope_o);
     corto_objectseq makeSeq = corto_scopeClaim(makes);
 
     /* Start admin server */
     admin_serverCreateChild(root_o, "admin", 9090);
 
-    /* Instantiate table with name 'Car' and type 'tree/Car' (creates topic) */
+    /* Instantiate table with name 'Car' and type 'demo/Car' */
     corto_object topic = corto_tablescopeCreateChild(root_o, "Car", demo_Car_o);
 
-    /* If key is provided, create new car instance */
+    /* Create new car instances */
     for (i = 0; i < CAR_COUNT; i++) {
         instances[i] = demo_CarDeclareChild(topic, NULL);
 
@@ -64,14 +64,18 @@ int demoMain(int argc, char *argv[]) {
     float t = 0;
     while (1) {
         for (i = 0; i < CAR_COUNT; i++) {
+            /* Lookup objects in tree of current Car instance */
             engine = corto_lookupAssert(instances[i], "Engine", demo_Car_Engine_o);
             fl = corto_lookupAssert(instances[i], "Wheel/FrontLeft", demo_Car_Wheel_o);
             fr = corto_lookupAssert(instances[i], "Wheel/FrontRight", demo_Car_Wheel_o);
             bl = corto_lookupAssert(instances[i], "Wheel/BackLeft", demo_Car_Wheel_o);
             br = corto_lookupAssert(instances[i], "Wheel/BackRight", demo_Car_Wheel_o);
 
+            /* Update members of car */
             demo_Position p = {cos(i + t) + 52.3, sin(i + t) + 4.8};
             demo_CarUpdate(instances[i], 55 + rnd(5), &p, instances[i]->make);
+
+            /* Update engine */
             demo_Car_EngineUpdate(
                 engine, 
                 3000 + rnd(1000), 
@@ -86,6 +90,8 @@ int demoMain(int argc, char *argv[]) {
             if (engine->oilLevel < 25) {
                 engine->warning = TRUE;
             }
+            
+            /* Update wheels */
             demo_Car_WheelUpdate(fl, 50 + rnd(2));
             demo_Car_WheelUpdate(fr, 50 + rnd(2));
             demo_Car_WheelUpdate(bl, 50 + rnd(2));
