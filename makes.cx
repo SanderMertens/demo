@@ -1,0 +1,44 @@
+
+tablescope Make: type=demo/CarMake ::
+    demo/CarMake Acura{}
+    demo/CarMake Martin{}
+    demo/CarMake Audi{}
+    demo/CarMake BMW{}
+    demo/CarMake Bentley{}
+    demo/CarMake Buick{}
+    demo/CarMake Cadillac{}
+    demo/CarMake Chevrolet{}
+    demo/CarMake Chrysler{}
+    demo/CarMake Dodge{}
+    demo/CarMake FIAT{}
+    demo/CarMake Ferrari{}
+    demo/CarMake Ford{}
+    demo/CarMake GMC{}
+    demo/CarMake Honda{}
+    demo/CarMake Hyundai{}
+    demo/CarMake INFINITI{}
+    demo/CarMake Jaguar{}
+    demo/CarMake Jeep{}
+    demo/CarMake Kia{}
+    demo/CarMake Lamborghini{}
+    demo/CarMake Rover{}
+    demo/CarMake Lexus{}
+    demo/CarMake Lincoln{}
+    demo/CarMake Lotus{}
+    demo/CarMake MINI{}
+    demo/CarMake Maserati{}
+    demo/CarMake Mazda{}
+    demo/CarMake Benz{}
+    demo/CarMake Mitsubishi{}
+    demo/CarMake Nissan{}
+    demo/CarMake Porsche{}
+    demo/CarMake Ram{}
+    demo/CarMake Royce{}
+    demo/CarMake Scion{}
+    demo/CarMake Subaru{}
+    demo/CarMake Tesla{}
+    demo/CarMake Toyota{}
+    demo/CarMake Volkswagen{}
+    demo/CarMake Volvo{}
+    demo/CarMake smart{}
+

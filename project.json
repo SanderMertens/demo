@@ -2,6 +2,7 @@
     "id": "demo",
     "type": "application",
     "value": {
-        "dependencies": ["corto/admin"]
+        "dependencies": ["corto/admin"],
+        "lib": ["m"]
     }
 }

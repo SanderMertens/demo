@@ -13,8 +13,8 @@
 
 #define CAR_COUNT (100)
 
-float rnd(int max) {
-    return ((float)rand() / (float)RAND_MAX) * (float)max;
+float rnd(float max) {
+    return ((float)rand() / (float)RAND_MAX) * max;
 }
 /* $end */
 
@@ -24,6 +24,13 @@ int demoMain(int argc, char *argv[]) {
     demo_Car_Engine engine = NULL;
     demo_Car_Wheel fl, fr, bl, br;
     int i;
+
+    /* Load car makes */
+    corto_load("makes.cx", 0, NULL);
+
+    /* Load objects in array */
+    corto_object makes = corto_lookupAssert(root_o, "Make", corto_tablescope_o);
+    corto_objectseq makeSeq = corto_scopeClaim(makes);
 
     /* Start admin server */
     admin_serverCreateChild(root_o, "admin", 9090);
@@ -35,8 +42,12 @@ int demoMain(int argc, char *argv[]) {
     for (i = 0; i < CAR_COUNT; i++) {
         instances[i] = demo_CarDeclareChild(topic, NULL);
 
+        corto_setref(&instances[i]->make, makeSeq.buffer[(int)rnd(makeSeq.length)]);
+
         /* Lookup singleton Engine object */
         engine = corto_lookupAssert(instances[i], "Engine", demo_Car_Engine_o);
+        engine->fuelLevel = rnd(100);
+        engine->oilLevel = rnd(100);
 
         /* Populate 'Wheel' table */
         fl = corto_declareChild(instances[i], "Wheel/FrontLeft", demo_Car_Wheel_o);
@@ -48,6 +59,9 @@ int demoMain(int argc, char *argv[]) {
         corto_define(instances[i]);
     }
 
+    corto_scopeRelease(makeSeq);
+
+    float t = 0;
     while (1) {
         for (i = 0; i < CAR_COUNT; i++) {
             engine = corto_lookupAssert(instances[i], "Engine", demo_Car_Engine_o);
@@ -56,8 +70,22 @@ int demoMain(int argc, char *argv[]) {
             bl = corto_lookupAssert(instances[i], "Wheel/BackLeft", demo_Car_Wheel_o);
             br = corto_lookupAssert(instances[i], "Wheel/BackRight", demo_Car_Wheel_o);
 
-            demo_CarUpdate(instances[i], 65 + rnd(5));
-            demo_Car_EngineUpdate(engine, 3000 + rnd(1000), 250 + rnd(25));
+            demo_Position p = {cos(i + t) + 52.3, sin(i + t) + 4.8};
+            demo_CarUpdate(instances[i], 55 + rnd(5), &p, instances[i]->make);
+            demo_Car_EngineUpdate(
+                engine, 
+                3000 + rnd(1000), 
+                250 + rnd(25), 
+                engine->fuelLevel - rnd(0.1),
+                engine->oilLevel - rnd(0.01),
+                engine->warning);
+
+            if (engine->oilLevel < 0) {
+                engine->oilLevel = 100;
+            }
+            if (engine->oilLevel < 25) {
+                engine->warning = TRUE;
+            }
             demo_Car_WheelUpdate(fl, 50 + rnd(2));
             demo_Car_WheelUpdate(fr, 50 + rnd(2));
             demo_Car_WheelUpdate(bl, 50 + rnd(2));
@@ -65,6 +93,7 @@ int demoMain(int argc, char *argv[]) {
         }
 
         corto_sleep(1, 0);
+        t += 0.001;
     }
 
     return 0;

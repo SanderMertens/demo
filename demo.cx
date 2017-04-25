@@ -2,9 +2,18 @@
 
 enum WheelLocation:: FrontLeft, FrontRight, BackLeft, BackRight
 
+struct Position::
+    latitude: float32
+    longitude: float32
+
+table CarMake::
+    name: string, key
+
 table Car::
     license_plate: string, key
     speed: float32
+    pos: Position
+    make: demo/CarMake
 
     table Wheel::
         location: WheelLocation, key
@@ -15,4 +24,8 @@ table Car::
 
     leaf Engine::
         rpm: float32
-        temperature: float32    
+        temperature: float32
+        fuelLevel: float32
+        oilLevel: float32
+        warning: bool
+
