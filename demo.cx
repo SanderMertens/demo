@@ -1,0 +1,18 @@
+#package demo
+
+enum WheelLocation:: FrontLeft, FrontRight, BackLeft, BackRight
+
+table Car::
+    license_plate: string, key
+    speed: float32
+
+    table Wheel::
+        location: WheelLocation, key
+        pressure: float32
+
+        leaf Tire::
+            brand: string
+
+    leaf Engine::
+        rpm: float32
+        temperature: float32    
