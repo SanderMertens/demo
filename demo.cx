@@ -1,28 +1,28 @@
-#package demo
+in package demo
 
-enum WheelLocation:: FrontLeft, FrontRight, BackLeft, BackRight
+enum WheelLocation:/ FrontLeft, FrontRight, BackLeft, BackRight
 
-struct Position::
+struct Position:/
     latitude: float32
     longitude: float32
 
-table CarMake::
+table CarMake:/
     name: string, key
 
-table Car::
+table Car:/
     license_plate: string, key
     speed: float32
     pos: Position
     make: demo/CarMake
 
-    table Wheel::
+    table Wheel:/
         location: WheelLocation, key
         pressure: float32
 
-        leaf Tire::
+        leaf Tire:/
             brand: string
 
-    leaf Engine::
+    leaf Engine:/
         rpm: float32
         temperature: float32
         fuelLevel: float32
