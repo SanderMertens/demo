@@ -106,14 +106,14 @@ int demoMain(int argc, char *argv[]) {
             /* Send an update for the car instance */
             demo_CarUpdate(instances[i], 55 + rnd(5), &p, instances[i]->make);
 
-            /* Send an update for the engine */
+            /* Randomize engine values */
             demo_Car_EngineUpdate(
                 engine, 
-                3000 + rnd(1000), 
-                250 + rnd(25), 
-                engine->fuelLevel - rnd(0.1),
-                engine->oilLevel - rnd(0.01),
-                engine->warning);
+                3000 + rnd(1000), /* rpm */
+                250 + rnd(25), /* temperature */
+                engine->fuelLevel - rnd(0.1), /* fuel */
+                engine->oilLevel - rnd(0.01), /* oil */
+                engine->warning); /* warning light */
 
             /* For next cycle, check if values haven't gone out of bounds. In a
              * 'proper' application the Engine class should take care of this. */
