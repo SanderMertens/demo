@@ -1,4 +1,4 @@
-in package demo
+in application demo
 
 enum WheelLocation:/ FrontLeft, FrontRight, BackLeft, BackRight
 
