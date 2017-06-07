@@ -1,5 +1,5 @@
 
-tablescope Make: type=demo/CarMake ::
+tableinstance Make: type=demo/CarMake ::
     demo/CarMake Acura{}
     demo/CarMake Martin{}
     demo/CarMake Audi{}
