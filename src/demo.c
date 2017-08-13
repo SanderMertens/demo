@@ -1,14 +1,8 @@
-/* $CORTO_GENERATED
- *
- * demo.c
- *
- * Only code written between the begin and end tags will be preserved
- * when the file is regenerated.
- */
+/* This is a managed file. Do not delete this comment. */
 
 #include <include/demo.h>
 
-/* $header() */
+
 
 /* This demo creates objects of a 'Car' type which has been defined in demo.cx.
  * These objects are initialized with random values and updated in an infinite
@@ -28,10 +22,8 @@
 float rnd(float max) {
     return ((float)rand() / (float)RAND_MAX) * max;
 }
-/* $end */
 
 int demoMain(int argc, char *argv[]) {
-/* $begin(main) */
     demo_Car instances[CAR_COUNT];
     demo_Car_Engine engine = NULL;
     demo_Car_Wheel fl, fr, bl, br;
@@ -147,5 +139,5 @@ int demoMain(int argc, char *argv[]) {
 error:
     corto_error("%s", corto_lasterr());
     return -1;
-/* $end */
 }
+
