@@ -1,3 +1,4 @@
+in void data
 
 tableinstance Make: type=demo/CarMake ::
     demo/CarMake Acura{}

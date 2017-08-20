@@ -33,15 +33,15 @@ int demoMain(int argc, char *argv[]) {
     corto_load("makes.cx", 0 /* argc */, NULL /* argv */);
 
     /* Load make definitions in an array, so we can randomly select a make */
-    corto_object makes = corto_lookupAssert(root_o, "Make", corto_tableinstance_o);
+    corto_object makes = corto_lookupAssert(root_o, "data/Make", corto_tableinstance_o);
     corto_objectseq makeSeq = corto_scopeClaim(makes);
 
     /* Start the admin webserver on port 9090 */
-    admin_serverCreateChild(root_o, "admin", 9090);
+    admin_serverCreateChild(root_o, "config/admin", 9090);
 
     /* Instantiate table with name 'Car' and type 'tree/Car'. A table is a scope
      * in the store where all objects are of the same type. */
-    corto_object table = corto_tableinstanceCreateChild(root_o, "Car", demo_Car_o);
+    corto_object table = corto_tableinstanceCreateChild(root_o, "data/Car", demo_Car_o);
 
     /* Create CAR_COUNT new cars */
     for (i = 0; i < CAR_COUNT; i++) {
