@@ -11,7 +11,8 @@
 #include <corto/corto.h>
 #include <include/_project.h>
 #include <corto/c/c.h>
-#include <corto/admin/admin.h>
+#include <corto/ws/ws.h>
+#include <corto/ui/ui.h>
 
 /* $header() */
 /* Enter additional code here. */

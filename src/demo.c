@@ -36,9 +36,6 @@ int demoMain(int argc, char *argv[]) {
     corto_object makes = corto_lookupAssert(root_o, "data/Make", corto_tableinstance_o);
     corto_objectseq makeSeq = corto_scopeClaim(makes);
 
-    /* Start the admin webserver on port 9090 */
-    admin_serverCreateChild(root_o, "config/admin", 9090);
-
     /* Instantiate table with name 'Car' and type 'tree/Car'. A table is a scope
      * in the store where all objects are of the same type. */
     corto_object table = corto_tableinstanceCreateChild(root_o, "data/Car", demo_Car_o);
@@ -100,7 +97,7 @@ int demoMain(int argc, char *argv[]) {
 
             /* Randomize engine values */
             demo_Car_EngineUpdate(
-                engine, 
+                engine,
                 3000 + rnd(1000), /* rpm */
                 250 + rnd(25), /* temperature */
                 engine->fuelLevel - rnd(0.1), /* fuel */
@@ -140,4 +137,3 @@ error:
     corto_error("%s", corto_lasterr());
     return -1;
 }
-
