@@ -1,0 +1,7 @@
+{
+    "id": "config/ws",
+    "type": "corto/ws/service",
+    "value": {
+        "port": 9090
+    }
+}
